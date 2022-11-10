@@ -1,0 +1,7 @@
+.profile__name-box {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: flex-end;
+    text-align: left;
+    max-width: 100%;
+}
