@@ -1,17 +1,25 @@
+require('dotenv').config();
+
 const express = require('express'); // Подключаем экспресс
 const mongoose = require('mongoose'); // И мангуста
 const { errors } = require('celebrate');
-const { createUser, login } = require('./controllers/users');
-const { cardRouter } = require('./routes/cards');
-const { userRouter } = require('./routes/users');
-const auth = require('./middlewares/auth');
-const NotFoundError = require('./errors/NotFoundError');
-const { validateCreateUser, validateLogin } = require('./utils/utils');
-const handleError = require('./middlewares/handleError');
+const helmet = require('helmet');
+const rateLimit = require('express-rate-limit');
+const cors = require('cors');
+
+const { reqLogger, errLogger } = require('./middlewares/logger');
+const { handleError } = require('./middlewares/handleError');
+const { routes } = require('./routes');
+
+const DATABASE_URL = 'mongodb://127.0.0.1:27017/mestodb';
 
 const { PORT = 3000 } = process.env;
 
 const app = express();
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 минут
+  max: 100, // 100 запросов с одного IP
+});
 
 // Массив доменов, с которых разрешены кросс-доменные запросы
 const allowedCors = [
@@ -21,9 +29,16 @@ const allowedCors = [
 ];
 
 // Подключаемся к серверу MongoDB по адресу:
-mongoose.connect('mongodb://localhost:27017/mestodb', { // mestodb — имя базы данных, которая будет создана в MongoDB
-  useNewUrlParser: true,
-});
+mongoose
+  .connect(DATABASE_URL)
+  .then(() => {
+    console.log(`Connected to database on ${DATABASE_URL}`);
+  })
+  .catch((err) => {
+    console.log('Error on database connection');
+    console.error(err);
+  });
+
 app.use(express.json());
 
 app.use((req, res, next) => {
@@ -37,20 +52,29 @@ app.use((req, res, next) => {
 });
 
 // РОУТЫ
-app.post('/signin', validateLogin, login); // Роуты для логина
-app.post('/signup', validateCreateUser, createUser); // и регистрации
+app.use(limiter);
 
-app.use(auth);
+app.use(cors());
 
-app.use('/users', userRouter);
-app.use('/cards', cardRouter);
+app.use(reqLogger);
 
-app.use('*', auth, (req, res, next) => {
-  next(new NotFoundError('Страница не найдена'));
+app.use(helmet());
+
+// Краш-тест сервера
+// (вызывает принудительное падение сервера
+// для проверки автоматического перезапуска)
+app.get('/crash-test', () => {
+  setTimeout(() => {
+    throw new Error('Сервер сейчас упадёт');
+  }, 0);
 });
+app.use(routes);
+
+app.use(errLogger);
+
 app.use(errors());
 
-app.use((err, req, res, next) => { handleError(err, res, next); });
+app.use(handleError);
 
 app.listen(PORT, () => { // Сервер слушает 3000-й порт
   console.log(`App listening on port ${PORT}`);
