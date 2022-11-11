@@ -1,11 +1,11 @@
 const express = require('express');
 
-const cardRouter = require('./cards');
-const userRouter = require('./users');
+const { cardRouter } = require('./cards');
+const { userRouter } = require('./users');
 const { login, createUser } = require('../controllers/users');
 const { validateCreateUser, validateLogin } = require('../utils/utils');
 
-const auth = require('../middlewares/auth');
+const { auth } = require('../middlewares/auth');
 const { NotFoundError } = require('../errors');
 
 const routes = express.Router();
@@ -33,4 +33,4 @@ routes.all('*', (req, res, next) => {
   next(new NotFoundError('Страница не найдена'));
 });
 
-module.exports = routes;
+module.exports = { routes };
