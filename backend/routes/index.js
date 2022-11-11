@@ -5,7 +5,7 @@ const { userRouter } = require('./users');
 const { login, createUser } = require('../controllers/users');
 const { validateCreateUser, validateLogin } = require('../utils/utils');
 
-const { auth } = require('../middlewares/auth');
+const auth = require('../middlewares/auth');
 const { NotFoundError } = require('../errors');
 
 const routes = express.Router();
