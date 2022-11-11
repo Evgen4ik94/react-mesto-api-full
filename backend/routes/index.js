@@ -33,4 +33,4 @@ routes.all('*', (req, res, next) => {
   next(new NotFoundError('Страница не найдена'));
 });
 
-module.exports = { routes };
+module.exports = routes;
