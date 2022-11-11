@@ -9,7 +9,7 @@ const cors = require('cors');
 
 const { reqLogger, errLogger } = require('./middlewares/logger');
 const { handleError } = require('./middlewares/handleError');
-const { routes } = require('./routes');
+const routes = require('./routes');
 
 const DATABASE_URL = 'mongodb://127.0.0.1:27017/mestodb';
 
