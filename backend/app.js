@@ -18,7 +18,7 @@ const { PORT = 3000 } = process.env;
 const app = express();
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 минут
-  max: 100, // 100 запросов с одного IP
+  max: 50, // 100 запросов с одного IP
 });
 
 // Массив доменов, с которых разрешены кросс-доменные запросы
