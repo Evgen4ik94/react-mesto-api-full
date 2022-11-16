@@ -5,7 +5,6 @@ const mongoose = require('mongoose'); // И мангуста
 const { errors } = require('celebrate');
 const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
-const cors = require('cors');
 
 const { reqLogger, errLogger } = require('./middlewares/logger');
 const { handleError } = require('./middlewares/handleError');
@@ -59,10 +58,7 @@ app.use((req, res, next) => {
   next();
 });
 
-// РОУТЫ
 app.use(limiter);
-
-app.use(cors());
 
 app.use(reqLogger);
 
@@ -76,6 +72,7 @@ app.get('/crash-test', () => {
     throw new Error('Сервер сейчас упадёт');
   }, 0);
 });
+// РОУТЫ
 app.use(routes);
 
 app.use(errLogger);
