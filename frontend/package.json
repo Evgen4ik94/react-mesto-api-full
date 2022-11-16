@@ -1,6 +1,5 @@
 {
-  "homepage": "https://evgen4ik94.github.io/react-mesto-api-full",
-  "name": "mesto-react",
+   "name": "mesto-react",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
