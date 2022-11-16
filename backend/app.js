@@ -35,15 +35,7 @@ const allowedCors = [
 ];
 
 // Подключаемся к серверу MongoDB по адресу:
-mongoose
-  .connect(DATABASE_URL)
-  .then(() => {
-    console.log(`Connected to database on ${DATABASE_URL}`);
-  })
-  .catch((err) => {
-    console.log('Error on database connection');
-    console.error(err);
-  });
+mongoose.connect(DATABASE_URL);
 
 app.use(express.json());
 
@@ -64,7 +56,7 @@ app.use((req, res, next) => {
     return res.end();
   }
 
-  return next();
+  next();
 });
 
 // РОУТЫ
