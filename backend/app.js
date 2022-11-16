@@ -20,8 +20,12 @@ const limiter = rateLimit({
   max: 50, // 100 запросов с одного IP
 });
 
+// Подключаемся к серверу MongoDB по адресу:
+mongoose.connect(DATABASE_URL);
 
+app.use(express.json());
 
+// CORS
 // Массив доменов, с которых разрешены кросс-доменные запросы
 const allowedCors = [
   'mesto-exo.nomoredomains.icu',
@@ -32,13 +36,6 @@ const allowedCors = [
   'localhost:3000',
   'https://web.postman.co',
 ];
-
-// Подключаемся к серверу MongoDB по адресу:
-mongoose.connect(DATABASE_URL);
-
-app.use(express.json());
-
-// CORS
 app.use(function(req, res, next) {
   const { origin } = req.headers; // Сохраняем источник запроса в переменную origin
   // проверяем, что источник запроса есть среди разрешённых
@@ -66,7 +63,7 @@ app.use((req, res, next) => {
     return res.end();
   }
 
-  next();
+  return next();
 });
 
 app.use(limiter);
