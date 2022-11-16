@@ -23,6 +23,9 @@ const limiter = rateLimit({
 
 // Массив доменов, с которых разрешены кросс-доменные запросы
 const allowedCors = [
+  'api.mesto-exo.nomoredomains.icu',
+  'api.mestoapp.gq',
+  'www.api.mestoapp.gq',
   'https://praktikum.tk',
   'http://praktikum.tk',
   'localhost:3000',
