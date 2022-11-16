@@ -21,6 +21,8 @@ const limiter = rateLimit({
   max: 50, // 100 запросов с одного IP
 });
 
+
+
 // Массив доменов, с которых разрешены кросс-доменные запросы
 const allowedCors = [
   'mesto-exo.nomoredomains.icu',
@@ -45,14 +47,24 @@ mongoose
 
 app.use(express.json());
 
+// CORS
 app.use((req, res, next) => {
-  const { origin } = req.headers; // Сохраняем источник запроса в переменную origin
-  // проверяем, что источник запроса есть среди разрешённых
-  if (allowedCors.includes(origin)) {
-  // устанавливаем заголовок, который разрешает браузеру запросы с этого источника
-    res.header('Access-Control-Allow-Origin', '*');
+  const { origin } = req.headers;
+  const { method } = req;
+  const requestHeaders = req.headers['access-control-request-headers'];
+  const DEFAULT_ALLOWED_METHODS = 'GET,HEAD,PUT,PATCH,POST,DELETE';
+
+  res.header('Access-Control-Allow-Origin', origin);
+  res.header('Access-Control-Allow-Credentials', true);
+
+  if (method === 'OPTIONS') {
+    res.header('Access-Control-Allow-Methods', DEFAULT_ALLOWED_METHODS);
+    res.header('Access-Control-Allow-Headers', requestHeaders);
+
+    return res.end();
   }
-  next();
+
+  return next();
 });
 
 // РОУТЫ
