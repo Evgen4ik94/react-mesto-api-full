@@ -39,6 +39,17 @@ mongoose.connect(DATABASE_URL);
 app.use(express.json());
 
 // CORS
+app.use(function(req, res, next) {
+  const { origin } = req.headers; // Сохраняем источник запроса в переменную origin
+  // проверяем, что источник запроса есть среди разрешённых
+  if (allowedCors.includes(origin)) {
+     // устанавливаем заголовок, который разрешает браузеру запросы с этого источника
+    res.header('Access-Control-Allow-Origin', origin);
+  }
+
+  next();
+});
+
 app.use((req, res, next) => {
   const { origin } = req.headers;
   const { method } = req;
