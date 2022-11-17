@@ -47,12 +47,11 @@ app.use((req, res, next) => {
 });
 
 app.use((req, res, next) => {
-  const { origin } = req.headers;
   const { method } = req;
   const requestHeaders = req.headers['access-control-request-headers'];
   const DEFAULT_ALLOWED_METHODS = 'GET,HEAD,PUT,PATCH,POST,DELETE';
 
-  res.header('Access-Control-Allow-Origin', origin);
+  res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Credentials', true);
 
   if (method === 'OPTIONS') {
@@ -75,7 +74,7 @@ app.use(helmet());
 // для проверки автоматического перезапуска)
 app.get('/crash-test', () => {
   setTimeout(() => {
-    throw new Error('Сервер сейчас упадёт');
+    throw new Error('Падение сервера...');
   }, 0);
 });
 // РОУТЫ
