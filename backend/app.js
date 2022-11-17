@@ -28,8 +28,8 @@ app.use(express.json());
 // CORS
 // Массив доменов, с которых разрешены кросс-доменные запросы
 const allowedCors = [
-  'https://api.mesto-exo.nomoredomains.icu',
-  'http://api.mesto-exo.nomoredomains.icu',
+  'https://mesto-exo.nomoredomains.icu',
+  'http://mesto-exo.nomoredomains.icu',
   'localhost:3000',
   'https://web.postman.co',
 ];
