@@ -108,7 +108,7 @@ class Api {
 }
 
 const api = new Api({
-  source: 'https://api.mesto-exo.nomoredomains.icu',
+  url: 'https://api.mesto-exo.nomoredomains.icu',
 })
 
 export default api;
