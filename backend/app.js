@@ -30,8 +30,6 @@ app.use(express.json());
 const allowedCors = [
   'https://mesto-exo.nomoredomains.icu',
   'http://mesto-exo.nomoredomains.icu',
-  'https://praktikum.tk',
-  'http://praktikum.tk',
   'localhost:3000',
   'https://web.postman.co',
 ];
