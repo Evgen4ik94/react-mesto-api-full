@@ -1,4 +1,4 @@
-export const BASE_URL = 'https://mesto-exo.nomoredomains.icu';
+export const BASE_URL = 'https://api.mesto-exo.nomoredomains.icu';
 
 const request = ({ url, method = 'POST', token, body }) => {
   const config = {
