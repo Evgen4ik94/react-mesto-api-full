@@ -1,4 +1,4 @@
-export const BASE_URL = 'https://auth.nomoreparties.co/';
+export const BASE_URL = 'https://api.mesto-exo.nomoredomains.icu';
 
 const request = ({ url, method = 'POST', token, body }) => {
   const config = {
