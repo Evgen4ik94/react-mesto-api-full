@@ -28,9 +28,9 @@ app.use(express.json());
 // CORS
 // Массив доменов, с которых разрешены кросс-доменные запросы
 const allowedCors = [
-  'mesto-exo.nomoredomains.icu',
-  'mestoapp.gq',
-  'www.mestoapp.gq',
+  'https://mesto-exo.nomoredomains.icu',
+  'https://mestoapp.gq',
+  'https://www.mestoapp.gq',
   'https://praktikum.tk',
   'http://praktikum.tk',
   'localhost:3000',
@@ -47,11 +47,12 @@ app.use((req, res, next) => {
 });
 
 app.use((req, res, next) => {
+  const { origin } = req.headers;
   const { method } = req;
   const requestHeaders = req.headers['access-control-request-headers'];
   const DEFAULT_ALLOWED_METHODS = 'GET,HEAD,PUT,PATCH,POST,DELETE';
 
-  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Origin', origin);
   res.header('Access-Control-Allow-Credentials', true);
 
   if (method === 'OPTIONS') {
