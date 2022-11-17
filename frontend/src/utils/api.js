@@ -1,6 +1,6 @@
 class Api {
-  constructor(headers) {
-    this._headers = headers;
+  constructor(config) {
+    this._url = config.url;
   }
 
   _responseResult(res) {
@@ -84,8 +84,9 @@ class Api {
 }
 
 const api = new Api({
+  url: "api.mesto-exo.nomoredomains.icu",
   headers: {
-    authorization: "76d23833-7ba9-4f79-9b2a-5a0913e0b1e5",
+    authorization: "Bearer 76d23833-7ba9-4f79-9b2a-5a0913e0b1e5",
     "content-type": "application/json",
   },
 });
