@@ -29,7 +29,7 @@ app.use(express.json());
 // Массив доменов, с которых разрешены кросс-доменные запросы
 const allowedCors = [
   'https://mesto-exo.nomoredomains.icu',
-  'https://mesto-exo.nomoredomains.icu',
+  'http://mesto-exo.nomoredomains.icu',
   'https://praktikum.tk',
   'http://praktikum.tk',
   'localhost:3000',
