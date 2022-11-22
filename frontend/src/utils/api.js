@@ -84,7 +84,6 @@ class Api {
 const api = new Api({
   url: "https://api.mesto-exo.nomoredomains.icu",
   headers: {
-    authorization: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MzVkNTE1Y2FhYjQ1NTZjZmE0Y2Q0MDQiLCJpYXQiOjE2NjcwNzQxNjAsImV4cCI6MTY2NzY3ODk2MH0.TsBIrrzDw9xOdsXJwOFCFQzP81E32CqvLzxEqRj29ZI",
     "content-type": "application/json",
   },
 });
