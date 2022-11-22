@@ -49,7 +49,7 @@ function App() {
   useEffect(() => {
     checkToken();
      // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [loggedIn]);
+  }, []);
 
   //Эффект, отвечающий за запрос на отображение карточек и информации пользователя
   useEffect(() => {

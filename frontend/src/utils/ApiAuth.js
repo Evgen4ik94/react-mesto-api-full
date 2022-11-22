@@ -40,9 +40,6 @@ export const checkToken = (token) => {
   return request({
     url: '/users/me',
     method: 'GET',
-    headers: {
-        "Content-Type": "application/json",
-        "Authorization" : `Bearer ${token}`
-      },
+    token,
   });
 };
