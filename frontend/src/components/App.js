@@ -53,13 +53,13 @@ function App() {
         setCards(cardList);
       })
       .catch((err) => console.log(err));
-  }, []);
+  }, [loggedIn]);
 
   // Эффект проверяющий токен при загрузки страницы, чтобы не обрывало сессию при перезагрузке страницы
   useEffect(() => {
     checkToken();
      // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [loggedIn]);
+  }, []);
 
 
   // ===== Функции-обработчики для открытия попапов
