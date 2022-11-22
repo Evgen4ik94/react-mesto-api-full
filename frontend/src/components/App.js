@@ -156,7 +156,6 @@ function App() {
       ApiAuth.checkToken(jwt)
         .then((res) => {
           if (res) {
-            api.setToken(jwt);
             setLoggedIn(true);
             setUserEmail(res.data.email);
             history.push('/');
