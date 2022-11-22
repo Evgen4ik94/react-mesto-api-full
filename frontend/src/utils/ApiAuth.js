@@ -1,4 +1,4 @@
-export const BASE_URL = 'https://api.mesto-exo.nomoredomains.icu/';
+export const BASE_URL = 'https://api.mesto-exo.nomoredomains.icu';
 
 const request = ({ url, method = 'POST', token, body }) => {
   const config = {
@@ -19,14 +19,14 @@ const request = ({ url, method = 'POST', token, body }) => {
 
 export const register = (email, password) => {
   return request({
-    url: 'signup',
+    url: '/signup',
     body: { email, password },
   });
 };
 
 export const authorize = (email, password) => {
   return request({
-    url: 'signin',
+    url: '/signin',
     body: { email, password },
   }).then((res) => {
     if (res.token) {
@@ -38,7 +38,7 @@ export const authorize = (email, password) => {
 
 export const checkToken = (token) => {
   return request({
-    url: 'users/me',
+    url: '/users/me',
     method: 'GET',
     token,
   });
