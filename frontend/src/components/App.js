@@ -149,6 +149,24 @@ function App() {
               })
               .catch((err) => alert('Ошибка при добавлении карточки', err));
   }
+  
+// === Функция проверки токена === //
+  function checkToken() {
+    const jwt = localStorage.getItem('jwt');
+    if (jwt) {
+      ApiAuth.checkToken(jwt)
+        .then((res) => {
+          if (res) {
+            setLoggedIn(true);
+            setUserEmail(res.data.email);
+            history.push('/');
+          }
+        })
+        .catch((err) => {
+          console.log('Возникла ошибка при проверке токена:', err);
+        })
+    }
+  }
 
   // === Функция регистрации === //
   function handleRegistration(email, password) {
@@ -173,7 +191,7 @@ function App() {
     ApiAuth.authorize(email, password)
       .then((res) => {
         if (res.token) {
-          localStorage.setItem('token', res.token);
+          localStorage.setItem('jwt', res.token);
           setLoggedIn(true);
           setUserEmail(email);
           history.push('/');
@@ -185,25 +203,6 @@ function App() {
         setIsRegistrationSuccess(false);
         console.log('Ошибка входа в систему:', err);
       });
-  }
-
-  // === Функция проверки токена === //
-  function checkToken() {
-    const token = localStorage.getItem('token');
-    if (token) {
-      ApiAuth.checkToken(token)
-        .then((res) => {
-          if (res) {
-            api.setToken(token);
-            setLoggedIn(true);
-            setUserEmail(res.data.email);
-            history.push('/');
-          }
-        })
-        .catch((err) => {
-          console.log('Возникла ошибка при проверке токена:', err);
-        })
-    }
   }
 
   function handleLogOut() {
