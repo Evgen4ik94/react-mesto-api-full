@@ -12,8 +12,6 @@ const routes = express.Router();
 
 routes.all('*', express.json());
 
-routes.use(auth);
-
 routes.post(
   '/signup',
   validateCreateUser,
