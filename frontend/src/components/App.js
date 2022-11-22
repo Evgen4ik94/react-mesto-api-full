@@ -50,7 +50,7 @@ function App() {
     checkToken();
      // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  
+
   //Эффект, отвечающий за запрос на отображение карточек и информации пользователя
   useEffect(() => {
     Promise.all([api.getUserData(), api.getInitialCards()])
@@ -156,6 +156,7 @@ function App() {
       ApiAuth.checkToken(jwt)
         .then((res) => {
           if (res) {
+            api.setToken(jwt);
             setLoggedIn(true);
             setUserEmail(res.data.email);
             history.push('/');
@@ -189,8 +190,10 @@ function App() {
   function handleAuthorization(email, password) {
     ApiAuth.authorize(email, password)
       .then((res) => {
+        const jwt = res.token;
         if (res.token) {
-          localStorage.setItem('jwt', res.token);
+          localStorage.setItem('jwt', jwt);
+          api.setToken(jwt);
           setLoggedIn(true);
           setUserEmail(email);
           history.push('/');
