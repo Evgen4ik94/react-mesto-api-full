@@ -173,7 +173,7 @@ function App() {
     ApiAuth.authorize(email, password)
       .then((res) => {
         if (res.token) {
-          localStorage.setItem('jwt', res.token);
+          localStorage.setItem('token', res.token);
           setLoggedIn(true);
           setUserEmail(email);
           history.push('/');
@@ -189,11 +189,12 @@ function App() {
 
   // === Функция проверки токена === //
   function checkToken() {
-    const jwt = localStorage.getItem('jwt');
-    if (jwt) {
-      ApiAuth.checkToken(jwt)
+    const token = localStorage.getItem('token');
+    if (token) {
+      ApiAuth.checkToken(token)
         .then((res) => {
           if (res) {
+            api.setToken(token);
             setLoggedIn(true);
             setUserEmail(res.data.email);
             history.push('/');
