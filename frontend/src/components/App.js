@@ -45,6 +45,12 @@ function App() {
   //===========//
 
   //=== API ЗАПРОСЫ ===//
+  // Эффект проверяющий токен при загрузки страницы, чтобы не обрывало сессию при перезагрузке страницы
+  useEffect(() => {
+    checkToken();
+     // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+  
   //Эффект, отвечающий за запрос на отображение карточек и информации пользователя
   useEffect(() => {
     Promise.all([api.getUserData(), api.getInitialCards()])
@@ -54,13 +60,6 @@ function App() {
       })
       .catch((err) => console.log(err));
   }, [loggedIn]);
-
-  // Эффект проверяющий токен при загрузки страницы, чтобы не обрывало сессию при перезагрузке страницы
-  useEffect(() => {
-    checkToken();
-     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
 
   // ===== Функции-обработчики для открытия попапов
   function handleEditProfileClick() { //Открытие попапа ред. профиля по клику (меняем состояние на true)
