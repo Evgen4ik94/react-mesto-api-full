@@ -155,7 +155,6 @@ function App() {
     console.log(jwt);
     if (jwt) {
       api.setToken(jwt)
-      ApiAuth.checkToken(jwt)
         .then((res) => {
           if (res) {
             setLoggedIn(true);
