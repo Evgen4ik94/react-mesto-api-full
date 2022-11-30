@@ -155,10 +155,14 @@ function App() {
     console.log(jwt);
     if (jwt) {
       api.setToken(jwt)
-      .then(() => {
-          setLoggedIn(true);
-          history.push('/');
-        })
+      ApiAuth.checkToken(jwt)
+        .then((res) => {
+          if (res) {
+            setLoggedIn(true);
+            setUserEmail(res.data.email);
+            history.push('/');
+        }
+      })
       .catch((err) => {
         console.log('Возникла ошибка при проверке токена:', err);
       })
