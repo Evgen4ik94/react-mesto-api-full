@@ -1,13 +1,12 @@
 export const BASE_URL = 'https://api.mesto-exo.nomoredomains.icu';
 
-const request = ({ url, method = 'POST', token, body }) => {
+const request = ({ url, method = 'POST', body }) => {
   const config = {
     method,
     headers: {
       'Content-Type': 'application/json',
-      ...(!!token && { Authorization: `Bearer ${token}` }),
     },
-    ...(!!body && { body: JSON.stringify(body) }),
+    body: JSON.stringify(body),
   };
   return fetch(`${BASE_URL}${url}`, config).then((res) => {
     if (res.ok) {
