@@ -53,6 +53,9 @@ function App() {
 
   //Эффект, отвечающий за запрос на отображение карточек и информации пользователя
   useEffect(() => {
+    if (!loggedIn){
+    return;
+    }
     Promise.all([api.getUserData(), api.getInitialCards()])
       .then(([userInfo, cardList]) => {
         setCurrentUser(userInfo);
