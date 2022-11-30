@@ -88,7 +88,7 @@ class Api {
 const api = new Api({
   url: "https://api.mesto-exo.nomoredomains.icu",
   headers: {
-    "content-type": "application/json",
+    'Content-Type': 'application/json'
   },
 });
 

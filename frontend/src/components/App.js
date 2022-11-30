@@ -153,7 +153,7 @@ function App() {
   function checkToken() {
     const jwt = localStorage.getItem('jwt');
     if (jwt) {
-      api.setToken(jwt);
+      api.setToken(jwt)
       api.getUserData(jwt)
         .then((res) => {
           setCurrentUser(res);
