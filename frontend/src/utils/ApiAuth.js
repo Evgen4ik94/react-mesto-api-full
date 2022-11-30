@@ -35,10 +35,4 @@ export const authorize = (email, password) => {
   });
 };
 
-export const checkToken = (token) => {
-  return request({
-    url: '/users/me',
-    method: 'GET',
-    token,
-  });
-};
+
