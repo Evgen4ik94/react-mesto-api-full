@@ -5,7 +5,7 @@ class Api {
   }
 
   setToken(token) {
-    return this._headers.authorization = `Bearer ${token}`;
+    this._headers.authorization = `Bearer ${token}`;
   }
   
   _request(url, options) {
