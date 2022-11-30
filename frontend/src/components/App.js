@@ -152,6 +152,7 @@ function App() {
 // === Функция проверки токена === //
   function checkToken() {
     const jwt = localStorage.getItem('jwt');
+    console.log(jwt);
     if (jwt) {
       api.setToken(jwt);
       api.getUserData()
