@@ -154,11 +154,10 @@ function App() {
     const jwt = localStorage.getItem('jwt');
     if (jwt) {
       api.setToken(jwt);
-      api.getUser(jwt)
-        .then(({ email }) => {
-          setCurrentUser({ ...currentUser, email });
+      api.getUserData(jwt)
+        .then((res) => {
+          setCurrentUser(res);
           setLoggedIn(true);
-          // history.push("/");
         })
         .catch((err)=> console.log(err))
     }
