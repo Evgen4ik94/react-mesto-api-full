@@ -157,11 +157,9 @@ function App() {
       api.setToken(jwt)
       api.getUserData(jwt)
         .then((res) => {
-          if (res) {
             setLoggedIn(true);
             setUserEmail(res.data.email);
             history.push('/');
-          }
       })
       .catch((err) => {
         console.log('Возникла ошибка при проверке токена:', err);
