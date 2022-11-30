@@ -155,9 +155,8 @@ function App() {
     if (jwt) {
       api.setToken(jwt);
       api.getUserData()
-        .then((res) => {
+        .then(() => {
             setLoggedIn(true);
-            setCurrentUser(res.data.email);
             history.push('/');
         })
         .catch((err) => {
