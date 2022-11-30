@@ -46,16 +46,11 @@ function App() {
 
   //=== API ЗАПРОСЫ ===//
   // Эффект проверяющий токен при загрузки страницы, чтобы не обрывало сессию при перезагрузке страницы
-  useEffect(() => {
-    checkToken();
-     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   //Эффект, отвечающий за запрос на отображение карточек и информации пользователя
   useEffect(() => {
-    if (!loggedIn){
-    return;
-    }
+    checkToken();
+    if(!loggedIn)
     Promise.all([api.getUserData(), api.getInitialCards()])
       .then(([userInfo, cardList]) => {
         setCurrentUser(userInfo);
