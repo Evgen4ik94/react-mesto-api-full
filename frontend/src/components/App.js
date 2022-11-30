@@ -153,17 +153,14 @@ function App() {
   function checkToken() {
     const jwt = localStorage.getItem('jwt');
     if (jwt) {
-      ApiAuth.checkToken(jwt)
-        .then((res) => {
-          if (res) {
-            setLoggedIn(true);
-            setUserEmail(res.data.email);
-            history.push('/');
-          }
+      api.setToken(jwt);
+      api.getUser(jwt)
+        .then(({ email }) => {
+          setCurrentUser({ ...currentUser, email });
+          setLoggedIn(true);
+          // history.push("/");
         })
-        .catch((err) => {
-          console.log('Возникла ошибка при проверке токена:', err);
-        })
+        .catch((err)=> console.log(err))
     }
   }
 
