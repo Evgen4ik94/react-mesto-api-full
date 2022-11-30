@@ -49,8 +49,10 @@ function App() {
 
   //Эффект, отвечающий за запрос на отображение карточек и информации пользователя
   useEffect(() => {
+    if (!loggedIn){
+    return;
+    }
     checkToken();
-    if(!loggedIn)
     Promise.all([api.getUserData(), api.getInitialCards()])
       .then(([userInfo, cardList]) => {
         setCurrentUser(userInfo);
