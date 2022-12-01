@@ -46,13 +46,15 @@ function App() {
 
   //=== API ЗАПРОСЫ ===//
   // Эффект проверяющий токен при загрузки страницы, чтобы не обрывало сессию при перезагрузке страницы
+  useEffect(() => {
+    checkToken();
+  }, []);
 
   //Эффект, отвечающий за запрос на отображение карточек и информации пользователя
   useEffect(() => {
     if (!loggedIn){
     return;
     }
-    checkToken();
     Promise.all([api.getUserData(), api.getInitialCards()])
       .then(([userInfo, cardList]) => {
         setCurrentUser(userInfo);
