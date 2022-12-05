@@ -87,9 +87,9 @@ class Api {
 const api = new Api({
   url: "https://api.mesto-exo.nomoredomains.icu",
   headers: {
-    'Content-Type': 'application/json'
+    'Content-Type': 'application/json',
+    authorization: `Bearer ${localStorage.getItem('jwt')}`,
   },
-  authorization: `Bearer ${localStorage.getItem('jwt')}`,
 });
 
 
