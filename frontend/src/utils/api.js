@@ -4,9 +4,7 @@ class Api {
     this._headers = config.headers;
   }
 
-  setToken(token) {
-    this._headers.authorization = `Bearer ${token}`;
-  }
+
   
   _request(url, options) {
     return fetch(url, options)
@@ -21,6 +19,7 @@ class Api {
   }
 
   getInitialCards() {
+    console.log()
     return this._request(`${this._url}/cards`, {
       method: "GET",
       headers: this._headers
@@ -90,6 +89,7 @@ const api = new Api({
   headers: {
     'Content-Type': 'application/json'
   },
+  authorization: `Bearer ${localStorage.getItem('jwt')}`,
 });
 
 

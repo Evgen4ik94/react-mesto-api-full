@@ -44,25 +44,6 @@ function App() {
   const history = useHistory();
   //===========//
 
-  //=== API ЗАПРОСЫ ===//
-  // Эффект проверяющий токен при загрузки страницы, чтобы не обрывало сессию при перезагрузке страницы
-  useEffect(() => {
-    checkToken();
-  }, []);
-
-  //Эффект, отвечающий за запрос на отображение карточек и информации пользователя
-  useEffect(() => {
-    if (!loggedIn){
-    return;
-    }
-    Promise.all([api.getUserData(), api.getInitialCards()])
-      .then(([userInfo, cardList]) => {
-        setCurrentUser(userInfo);
-        setCards(cardList);
-      })
-      .catch((err) => console.log(err));
-  }, [loggedIn]);
-
   // ===== Функции-обработчики для открытия попапов
   function handleEditProfileClick() { //Открытие попапа ред. профиля по клику (меняем состояние на true)
     setIsEditProfilePopupOpenClose(true);
@@ -99,6 +80,25 @@ function App() {
     setSelectedCard({ name: "", link: "" });
     setIsInfoTooltipOpen(false);
   }
+
+//=== API ЗАПРОСЫ ===//
+  // Эффект проверяющий токен при загрузки страницы, чтобы не обрывало сессию при перезагрузке страницы
+  useEffect(() => {
+    checkToken();
+  }, []);
+
+  //Эффект, отвечающий за запрос на отображение карточек и информации пользователя
+  useEffect(() => {
+    if (!loggedIn){
+    return;
+    }
+    Promise.all([api.getUserData(), api.getInitialCards()])
+      .then(([userInfo, cardList]) => {
+        setCurrentUser(userInfo);
+        setCards(cardList);
+      })
+      .catch((err) => console.log(err));
+  }, [loggedIn]);
 
   //Добавим функцию лайка
   function handleLikeClick (card) {
@@ -154,9 +154,8 @@ function App() {
 // === Функция проверки токена === //
   function checkToken() {
     const jwt = localStorage.getItem('jwt');
-    console.log(jwt);
     if (jwt) {
-      api.setToken(jwt);
+      console.log(jwt);
       api.getUserData()
         .then((res) => {
             setLoggedIn(true);
@@ -194,7 +193,6 @@ function App() {
         const jwt = res.token;
         if (jwt) {
           localStorage.setItem('jwt', jwt);
-          api.setToken(jwt);
           setLoggedIn(true);
           setUserEmail(email);
           history.push('/');
