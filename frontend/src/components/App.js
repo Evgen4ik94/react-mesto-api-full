@@ -161,7 +161,7 @@ function App() {
         .then((res) => {
             setLoggedIn(true);
             setUserEmail(res.data.email);
-            // history.push('/');
+            history.push('/');
       })
       .catch((err) => {
         console.log('Возникла ошибка при проверке токена:', err);
@@ -192,7 +192,7 @@ function App() {
     ApiAuth.authorize(email, password)
       .then((res) => {
         const jwt = res.token;
-        if (res.token) {
+        if (jwt) {
           localStorage.setItem('jwt', jwt);
           api.setToken(jwt);
           setLoggedIn(true);
