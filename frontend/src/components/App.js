@@ -155,10 +155,11 @@ function App() {
   function checkToken() {
     const jwt = localStorage.getItem('jwt');
     if (jwt) {
-      ApiAuth.getContent(jwt)
+      api.getUserData()
         .then((res) => {
           if (res) {
             setLoggedIn(true);
+            setUserEmail(res.data.email);
           }
       })
       .catch((err) => {
