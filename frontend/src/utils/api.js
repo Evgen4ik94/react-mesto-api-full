@@ -4,8 +4,6 @@ class Api {
     this._headers = config.headers;
   }
 
-
-  
   _request(url, options) {
     return fetch(url, options)
       .then(this._responseResult);
@@ -19,7 +17,6 @@ class Api {
   }
 
   getInitialCards() {
-    console.log()
     return this._request(`${this._url}/cards`, {
       method: "GET",
       headers: this._headers
@@ -88,7 +85,7 @@ const api = new Api({
   url: "https://api.mesto-exo.nomoredomains.icu",
   headers: {
     'Content-Type': 'application/json',
-    authorization: `Bearer ${localStorage.getItem('jwt')}`,
+    'Authorization': `Bearer ${localStorage.getItem('jwt')}`,
   },
 });
 

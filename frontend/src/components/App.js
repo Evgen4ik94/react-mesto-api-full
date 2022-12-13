@@ -85,7 +85,7 @@ function App() {
   // Эффект проверяющий токен при загрузки страницы, чтобы не обрывало сессию при перезагрузке страницы
   useEffect(() => {
     checkToken();
-  }, []);
+  }, [loggedIn]);
 
   //Эффект, отвечающий за запрос на отображение карточек и информации пользователя
   useEffect(() => {
@@ -155,12 +155,10 @@ function App() {
   function checkToken() {
     const jwt = localStorage.getItem('jwt');
     if (jwt) {
-      console.log(jwt);
       api.getUserData()
         .then((res) => {
-            setLoggedIn(true);
-            setUserEmail(res.data.email);
-            history.push('/');
+          setLoggedIn(true);
+          setUserEmail(res.data.email);
       })
       .catch((err) => {
         console.log('Возникла ошибка при проверке токена:', err);
