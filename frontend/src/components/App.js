@@ -155,10 +155,12 @@ function App() {
   function checkToken() {
     const jwt = localStorage.getItem('jwt');
     if (jwt) {
-      api.getUserData()
+      api.getContent(jwt)
         .then((res) => {
-          setLoggedIn(true);
-          setUserEmail(res.data.email);
+          if (res) {
+            setLoggedIn(true);
+            setUserEmail(res.data.email);
+          }
       })
       .catch((err) => {
         console.log('Возникла ошибка при проверке токена:', err);
