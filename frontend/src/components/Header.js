@@ -1,32 +1,46 @@
-import React from "react";
-import logo from "../images/header-logo.svg"; //Импортируем логотип
-import { Link, Route } from 'react-router-dom';
+import { Link, Route, Routes, useLocation } from "react-router-dom";
+import logo from "../images/header-logo.svg";
 
-function Header({ userEmail, onLogOut }) { //Создаем компонент Header
-  return (  //Вставляем разметку шапки на страницу
+function Header({ email, onLogOutUser }) {
+  let location = useLocation();
+  return (
     <header className="header">
-      <img src={logo} alt="Логотип" className="header__logo" />
-      <Route path={'/sign-up'}>
-        <Link to='/sign-in' className="header__auth">
-          Войти
-        </Link>
-      </Route>
-
-      <Route path={'/sign-in'}>
-        <Link to='/sign-up' className="header__auth">
-          Регистрация
-        </Link>
-      </Route>
-
-      <Route exact path={'/'}>
-        <div className="header__profile">
-          <p className="header__email">{userEmail}</p>
-          <Link to="/sign-in" className="header__sign-out" onClick={onLogOut}>
-            Выйти
-          </Link>
-        </div>
-      </Route>
-
+      <img className="header__logo" src={logo} alt="Логотип" />
+      <div className="header__wrapper">
+        <p className="header__user-email">
+          {location.pathname === "/" ? email : ""}
+        </p>
+        <Routes>
+          <Route
+            path="sign-up"
+            element={
+              <Link className="header__button" to="/sign-in">
+                Войти
+              </Link>
+            }
+          />
+          <Route
+            path="/"
+            element={
+              <Link
+                className="header__button"
+                to="/sign-in"
+                onClick={() => onLogOutUser()}
+              >
+                Выйти
+              </Link>
+            }
+          />
+          <Route
+            path="/sign-in"
+            element={
+              <Link className="header__button" to="/sign-up">
+                Регистрация
+              </Link>
+            }
+          />
+        </Routes>
+      </div>
     </header>
   );
 }

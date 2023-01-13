@@ -1,24 +1,19 @@
-import React from "react";
-import Popup from "./Popup";
-import successImg from "../images/OK.svg";
-import rejectImg from "../images/REJECT.svg";
-
-// Попап-компонент для отображения успешной/не успешной регистрации 
-function InfoTooltip({ namePopup, isOpen, onClose, isSuccess }) {
-    return (
-        <Popup 
-            popupName={namePopup}
-            isOpen={isOpen}
-            onClose={onClose}
-        >
-            <figure className="infoTooltip__figure">
-                <img className="infoTooltip__img" src={isSuccess ? successImg : rejectImg} alt="Статус регистрации" /> 
-                <figcaption className="infoTooltip__caption">
-                    {isSuccess ? 'Вы успешно зарегистрировались!' : 'Что-то пошло не так! Попробуйте еще раз.'}
-                </figcaption>
-            </figure>
-        </Popup>
-    );
+function InfoTooltip({ image, infoMessage, isOpen, onClose }) {
+  return (
+    <div className={`popup popup_type_auth ${isOpen ? "popup_opened" : ""}`}>
+      <div
+        className="popup__container popup__container_type_auth"
+        style={{ backgroundImage: `url(${image})` }}
+      >
+        <button
+          className="popup__close-window"
+          type="button"
+          onClick={onClose}
+        />
+        <h3 className="popup__title popup__title_type_auth">{infoMessage}</h3>
+      </div>
+    </div>
+  );
 }
 
 export default InfoTooltip;

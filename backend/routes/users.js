@@ -1,25 +1,15 @@
-const router = require('express').Router();
+const userRouter = require('express').Router();
+const auth = require('../middlewares/auth');
 const {
-  validateUpdateProfile,
-  validateUpdateAvatar,
-  validateUserId,
-} = require('../utils/utils');
-
-// Создаем роуты для юзеров
-const {
-  getUsers,
-  getUser,
-  getCurrentUser,
-  updateAvatar,
-  updateProfile,
+  getUsers, getUser, editUser, editAvatar, getMeUser,
 } = require('../controllers/users');
+const { validationUserEdit, validationEditAvatar, validationUserId } = require('../middlewares/validationJoiUser');
 
-router.get('/', getUsers); // Возвращает всех пользователей
-router.get('/me', getCurrentUser); // Возвращает мой профиль
-router.get('/:userId', validateUserId, getUser); // Возвращает пользователя по _id
+userRouter.use(auth);
+userRouter.get('/users', getUsers);
+userRouter.get('/users/me', getMeUser);
+userRouter.get('/users/:id', validationUserId, getUser);
+userRouter.patch('/users/me', validationUserEdit, editUser);
+userRouter.patch('/users/me/avatar', validationEditAvatar, editAvatar);
 
-router.patch('/me', validateUpdateProfile, updateProfile);
-
-router.patch('/me/avatar', validateUpdateAvatar, updateAvatar);
-
-module.exports.userRouter = router;
+module.exports = userRouter;

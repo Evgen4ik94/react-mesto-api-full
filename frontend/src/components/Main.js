@@ -1,53 +1,67 @@
-import React from "react";
-import Card from "./Card";
+import { useContext } from "react";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
+import Card from "./Card";
+import Loader from "./Loader";
 
-function Main(props) {
-  const currentUser = React.useContext(CurrentUserContext); //Подписка на контекст
-  
+function Main({
+  cards,
+  loading,
+  onEditProfile,
+  onAddPlace,
+  onEditAvatar,
+  onCardClick,
+  handleCardLike,
+  handleCardDelete,
+}) {
+  const currentUser = useContext(CurrentUserContext);
   return (
     <>
-      <section className="profile">
-          <div className="profile__avatar">
-            <button onClick={props.onEditAvatar} className="profile__avatar-button">
+      {loading ? (
+        <Loader />
+      ) : (
+        <main className="content">
+          <section className="profile">
+            <div className="profile__avatar-button" onClick={onEditAvatar}>
               <img
+                className="profile__image"
                 src={currentUser.avatar}
                 alt="Фото профиля"
-                className="profile__image"
-              />
-            </button>
-          </div>
-          <div className="profile__info">
-            <div className="profile__name-box">
-              <h1 className="profile__name text">{currentUser.name || ""}</h1>
-              <button
-                className="profile__button profile__button-edit"
-                onClick={props.onEditProfile}
-                type="button"
               />
             </div>
-            <div className="profile__prof text">{currentUser.about || ""}</div>
-          </div>
-        <button
-          className="profile__button profile__button-add"
-          onClick={props.onAddPlace}
-          type="button"
-        />
-      </section>
-      <section className="gallery">
-        <ul className="gallery__list">
-          {props.cards.map((card) => (
-            <Card
-              key={card._id}
-              card={card}
-              likeCounter={card.likes.length}
-              onCardClick={props.onCardClick}
-              onCardLike={props.onCardLike}
-              onCardDelete={props.onCardDelete}
+            <div className="profile__info">
+              <div className="profile__user">
+                <h1 className="profile__title">{currentUser.name}</h1>
+                <button
+                  className="profile__edit-button"
+                  type="button"
+                  onClick={onEditProfile}
+                />
+              </div>
+              <p className="profile__subtitle">{currentUser.about}</p>
+            </div>
+            <button
+              className="profile__add-button"
+              type="button"
+              onClick={onAddPlace}
             />
-          ))}
-        </ul>
-      </section>
+          </section>
+          <section className="elements">
+            <ul className="element">
+              {cards.map((card) => {
+                return (
+                  <Card
+                    card={card}
+                    key={card._id}
+                    onCardClick={onCardClick}
+                    onCardLike={handleCardLike}
+                    onCardDelete={handleCardDelete}
+                  />
+                );
+              })}
+            </ul>
+          </section>
+        </main>
+      )}
     </>
   );
 }

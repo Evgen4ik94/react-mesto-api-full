@@ -1,39 +1,44 @@
-import React from "react";
-import '../styles/sign.css';
-import AuthForm from './AuthForm';
+function Login({ email, setEmail, password, setPassword, onLogin }) {
+  const handleChangeEmail = (evt) => {
+    setEmail(evt.target.value);
+  };
 
-function Login ({onLogin}) {
-    // Стейты полей в форме авторизации
-    const [email, setEmail] = React.useState("");
-    const [password, setPassword] = React.useState("");
+  const handleChangePassword = (evt) => {
+    setPassword(evt.target.value);
+  };
 
-    function handleChange(evt) {
-        if (evt.target.name === 'email') {
-            setEmail(evt.target.value);
-        } else if (evt.target.name === 'password') {
-            setPassword(evt.target.value);
-        }
-    }
+  const handleLoginSubmit = (evt) => {
+    evt.preventDefault();
+    onLogin();
+  };
 
-    function handleSubmit(e) {
-        e.preventDefault();
-        if (!email || !password) {      //Если поля пустые, прерываем ф-ю и очищаем поля
-            return;
-        }
-        onLogin(email, password);
-    }
-
-    return (
-        <AuthForm 
-            section="login"
-            title="Вход"
-            submit={handleSubmit}
-            onChange={handleChange}
-            submitText="Войти"
-            emailValue={email}
-            passwordValue={password}
-        />
-    );
+  return (
+    <>
+      <section className="auth auth_type_signup">
+        <h3 className="auth__title">Вход</h3>
+        <form
+          className="auth-form auth-form__login"
+          onSubmit={handleLoginSubmit}
+        >
+          <input
+            className="auth-form__input auth-form__input_type_email popup__form-item"
+            type="email"
+            placeholder="Email"
+            onChange={handleChangeEmail}
+            value={email || ""}
+          />
+          <input
+            className="auth-form__input auth-form__input_type_password popup__form-item"
+            type="password"
+            placeholder="Пароль"
+            onChange={handleChangePassword}
+            value={password || ""}
+          />
+          <button className="auth-form__submit">Войти</button>
+        </form>
+      </section>
+    </>
+  );
 }
 
 export default Login;

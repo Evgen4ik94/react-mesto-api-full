@@ -1,13 +1,22 @@
 .profile__info {
-    flex: 1 1 auto;
-    max-width: calc(100% - 120px - 150px);
-    padding-right: 25px;
+  max-width: 100%;
+  padding-left: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex-grow: 1;
 }
-@media screen and (max-width: 600px) {
-    .profile__info {
-        max-width: calc(100% - 38px);
-        align-self: center;
-        padding: 26px 0 36px 0;
-        text-align: center;
-    }
+
+@media screen and (max-width: 925px) {
+  .profile__info {
+    flex-grow: 0;
+  }
+}
+
+@media screen and (max-width: 710px) {
+  .profile__info {
+    width: 100%;
+    padding-left: 0px;
+    margin-top: 22px;
+  }
 }

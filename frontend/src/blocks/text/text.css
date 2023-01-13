@@ -1,8 +1,0 @@
-.text {
-    color: #fff;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
-    margin: 0;
-    padding: 0;
-}
