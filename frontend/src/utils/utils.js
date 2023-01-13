@@ -1,8 +1,8 @@
 const settingsApi = {
-  url: 'http://localhost:3000',
+  url: 'https://api.mesto-exo.nomoredomains.icu',
 };
 
-const authUrl = 'http://localhost:3000';
+const authUrl = 'https://api.mesto-exo.nomoredomains.icu';
 
 export { settingsApi, authUrl };
 

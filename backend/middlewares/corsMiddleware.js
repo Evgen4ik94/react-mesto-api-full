@@ -1,8 +1,8 @@
 const allowedCors = [
-  'https://vden.mesto.nomoredomains.icu',
-  'http://vden.mesto.nomoredomains.icu',
-  'https://www.vden.mesto.nomoredomains.icu',
-  'http://www.vden.mesto.nomoredomains.icu',
+  'https://mesto-exo.nomoredomains.icu',
+  'http://mesto-exo.nomoredomains.icu',
+  'https://mesto-exo.mesto.nomoredomains.icu',
+  'http://mesto-exo.mesto.nomoredomains.icu',
   'localhost:3001',
   'http://localhost:3001',
   'https://localhost:3001',
