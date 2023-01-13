@@ -58,7 +58,7 @@ npm run build // Сборка проекта
 
 ## Ссылки:
 Public IP: `158.160.53.193`
-
+* [Репозиторий на Github](https://github.com/Evgen4ik94/react-mesto-api-full)
 * [Фронтенд часть проекта](https://mesto-exo.nomoredomains.icu)
 * [Бэкенд часть проекта](https://api.mesto-exo.nomoredomains.icu)
 * [Ссылка на макет в Figma](https://www.figma.com/file/2cn9N9jSkmxD84oJik7xL7/JavaScript.-Sprint-4?node-id=0%3A1)
